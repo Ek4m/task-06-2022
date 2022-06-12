@@ -1,7 +1,7 @@
 import React from "react";
 import { useTable } from "react-table";
 
-export default function Table({ columns, data }) {
+export default function Table({ columns, data, onClick }) {
   const {
     getTableProps, // table props from react-table
     getTableBodyProps, // table body props from react-table
@@ -14,7 +14,10 @@ export default function Table({ columns, data }) {
   });
 
   return (
-    <table className="table table-dark table-striped" {...getTableProps()}>
+    <table
+      className="table table-dark table-striped table-hover"
+      {...getTableProps()}
+    >
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
@@ -28,7 +31,7 @@ export default function Table({ columns, data }) {
         {rows.map((row, i) => {
           prepareRow(row);
           return (
-            <tr {...row.getRowProps()}>
+            <tr onClick={() => onClick(row.original.id)} {...row.getRowProps()}>
               {row.cells.map((cell) => {
                 return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;
               })}

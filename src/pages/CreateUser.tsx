@@ -2,16 +2,7 @@ import { Field, Form, Formik, FormikHelpers } from "formik";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../api";
-interface UserCredentials {
-  username: number;
-  name: string;
-  surname: string;
-  email: string;
-  birth_date: string;
-  gender: string;
-  password: string;
-}
-
+import { UserCredentials } from "../types";
 const CreateUser = () => {
   const navigate = useNavigate();
 

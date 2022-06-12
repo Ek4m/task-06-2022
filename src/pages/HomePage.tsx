@@ -11,6 +11,7 @@ const HomePage = () => {
       {
         Header: "Personal info",
         columns: [
+          { Header: "Id", accessor: "id" },
           { Header: "Name", accessor: "name" },
           { Header: "Surname", accessor: "surname" },
           { Header: "Email", accessor: "email" },
@@ -52,7 +53,11 @@ const HomePage = () => {
       </div>
       <hr />
       {users ? (
-        <Table columns={columns} data={users} />
+        <Table
+          onClick={(id: number | string) => navigate("/users/" + id)}
+          columns={columns}
+          data={users}
+        />
       ) : (
         <div className="spinner-border text-primary" role="status">
           <span className="visually-hidden">Loading...</span>
