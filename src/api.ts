@@ -28,4 +28,6 @@ axiosInstance.interceptors.request.use(
 export const api = {
   login: (data: FormData) => axiosInstance.post("/login", data),
   getAllUsers: () => axiosInstance.get(REST_API + "/users"),
+  createUser: (data: any) =>
+    axiosInstance.post(REST_API + "/users/create", data),
 };
