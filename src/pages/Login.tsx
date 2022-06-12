@@ -2,6 +2,7 @@ import { Field, Form, Formik, FormikHelpers } from "formik";
 import React from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import { api } from "../api";
 import { REST_API } from "../constants/api";
 
 interface LoginCredentials {
@@ -20,11 +21,7 @@ const Login = () => {
       const formData = new FormData();
       formData.append("username", values.username);
       formData.append("password", values.password);
-      const response = await fetch(REST_API + "/login", {
-        method: "POST",
-        body: formData,
-      });
-      const data = await response.json();
+      const { data } = await api.login(formData);
       if (data.access_token ?? data.refresh_token) {
         setCookie("access_token", data.access_token, {
           expires: data.expires,
