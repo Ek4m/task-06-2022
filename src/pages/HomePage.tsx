@@ -1,5 +1,6 @@
 import React, { memo, useMemo, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Column } from "react-table";
 import { api } from "../api";
 import Table from "../components/Table";
 import { useFetch } from "../hooks/useFetch";
@@ -9,7 +10,10 @@ const HomePage = () => {
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
   const [blockSubmissionStarted, setBlockSubmissionStarted] = useState(false);
   const navigate = useNavigate();
-  const columns = useMemo(
+  const columns: Column<{
+    Header: string;
+    columns: { Header: string; accessor: string }[];
+  }>[] = useMemo(
     () => [
       {
         Header: "Personal info",
@@ -63,11 +67,6 @@ const HomePage = () => {
     <div>
       <div className="d-flex justify-content-between container align-items-center">
         <h1>List of users</h1>
-        <Link to="/users/add">
-          <button type="button" className="btn btn-primary">
-            Add
-          </button>
-        </Link>
       </div>
       <hr />
       {selectedUsers.length > 0 && (

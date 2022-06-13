@@ -5,10 +5,12 @@ import Login from "./pages/Login";
 import HomePage from "./pages/HomePage";
 import CreateUser from "./pages/CreateUser";
 import SingleUser from "./pages/SingleUser";
+import Header from "./components/Header";
 
 function App() {
   return (
     <div className="App">
+      <Header />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<HomePage />} />

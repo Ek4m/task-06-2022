@@ -7,7 +7,7 @@ export default function Table({
   onClick,
   onCheck,
   selectedRows,
-}) {
+}: any) {
   const {
     getTableProps, // table props from react-table
     getTableBodyProps, // table body props from react-table
@@ -39,18 +39,26 @@ export default function Table({
           prepareRow(row);
           let checkInputValue = selectedRows.includes(row.cells[0].value);
           return (
-            <tr onClick={() => onClick(row.original.id)} {...row.getRowProps()}>
+            <tr
+              onClick={() => onClick((row.original as any).id)}
+              {...row.getRowProps()}
+            >
               <td>
                 {/**
                  * input checkbox element for selecting rows.
                  *selected rows comes from parent component so logic can be applied to data inside parent not component.
                  *I as a developer assume that first element in row.cells is the primary key for the row.
                  */}
-                <div class="form-check" onClick={(e) => e.stopPropagation()}>
+                <div
+                  className="form-check"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <input
                     checked={checkInputValue}
-                    onChange={(e) => onCheck(row.original.id, e.target.checked)}
-                    class="form-check-input"
+                    onChange={(e) =>
+                      onCheck((row.original as any).id, e.target.checked)
+                    }
+                    className="form-check-input"
                     type="checkbox"
                     value={checkInputValue}
                     id="flexCheckDefault"
