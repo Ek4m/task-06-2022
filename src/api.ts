@@ -34,4 +34,6 @@ export const api = {
   getSingleUser: (id: string) => axiosInstance.get(`users/info?user_id=${id}`),
   updateSingleUser: (id: string, data: UserCredentials) =>
     axiosInstance.post(`users/edit`, data),
+  blockUnblockUsers: (data: { user_id: number[] }) =>
+    axiosInstance.post(`users/block`, data),
 };
