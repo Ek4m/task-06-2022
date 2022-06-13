@@ -31,7 +31,7 @@ export const api = {
   login: (data: FormData) => axiosInstance.post("/login", data),
   getAllUsers: () => axiosInstance.get("/users"),
   createUser: (data: any) => axiosInstance.post("/users/create", data),
-  getSingleUser: (id: string) => axiosInstance.get(`users/info?user_id=${id}`),
+  getSingleUser: (id: string) => axiosInstance.get<{data:UserCredentials}>(`users/info?user_id=${id}`),
   updateSingleUser: (id: string, data: UserCredentials) =>
     axiosInstance.post(`users/edit`, data),
   blockUnblockUsers: (data: { user_id: number[] }) =>
