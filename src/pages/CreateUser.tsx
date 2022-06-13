@@ -2,8 +2,8 @@ import { Field, Form, Formik, FormikHelpers } from "formik";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../api";
-import { UserCredentials } from "../types";
 import * as Yup from "yup";
+import { UserPostCredentials } from "../types";
 
 const CreateUserSchema = Yup.object().shape({
   birth_date: Yup.date().required("Birth date required"),
@@ -22,8 +22,8 @@ const CreateUser = () => {
   const [serverErrors, setServerErrors] = useState<any>({});
 
   const onSubmitHandler = async (
-    values: UserCredentials,
-    { setSubmitting }: FormikHelpers<UserCredentials>
+    values: UserPostCredentials,
+    { setSubmitting }: FormikHelpers<UserPostCredentials>
   ) => {
     try {
       await api.createUser(values);
