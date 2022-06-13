@@ -42,7 +42,6 @@ const Login = () => {
       }
       navigate("/");
     } catch (e: any) {
-      console.log(e);
       if (e && e.response && e.response.data) {
         setServerErrors(e.response.data);
       }
@@ -60,10 +59,13 @@ const Login = () => {
     >
       {({ isSubmitting, isValidating, errors }) => (
         <Form>
-          {(serverErrors.error || serverErrors.error_description) && (
+          {(serverErrors.error ||
+            serverErrors.error_description ||
+            serverErrors.message) && (
             <div className="alert alert-danger" role="alert">
               {serverErrors.error}
               {serverErrors.error_description}
+              {serverErrors.message}
             </div>
           )}
           <div className="mb-3">

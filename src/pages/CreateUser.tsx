@@ -47,13 +47,11 @@ const CreateUser = () => {
           name: "",
           password: "",
           surname: "",
-         username:""
-
+          username: "",
         }}
         onSubmit={onSubmitHandler}
       >
         {({ isSubmitting, isValidating, errors }) => {
-          console.log(errors);
           return (
             <Form>
               <div className="mb-3">

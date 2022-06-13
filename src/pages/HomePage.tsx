@@ -9,6 +9,7 @@ const HomePage = () => {
   // const [users, setUsers] = useState(null);
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
   const [blockSubmissionStarted, setBlockSubmissionStarted] = useState(false);
+  const [serverErrors, setServerErrors] = useState<any>({});
   const navigate = useNavigate();
   const columns: Column<{
     Header: string;
@@ -60,8 +61,8 @@ const HomePage = () => {
           });
         }
         setSelectedUsers([]);
-      } catch (e) {
-        console.log(e);
+      } catch (e: any) {
+        setServerErrors(e.response.data);
       } finally {
         setBlockSubmissionStarted(false);
       }
@@ -69,13 +70,21 @@ const HomePage = () => {
   };
 
   const { data: users, loading, error } = useFetch(api.getAllUsers);
-  console.log(error);
   return (
     <div>
       <div className="d-flex justify-content-between container align-items-center">
         <h1>List of users</h1>
       </div>
       <hr />
+      {(serverErrors.error ||
+        serverErrors.error_description ||
+        serverErrors.message) && (
+        <div className="alert alert-danger" role="alert">
+          {serverErrors.error}
+          {serverErrors.error_description}
+          {serverErrors.message}
+        </div>
+      )}
       {selectedUsers.length > 0 && (
         <div className="py-1 my-1 d-flex justify-content-around">
           {" "}
