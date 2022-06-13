@@ -8,7 +8,6 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   async (config) => {
-    console.log("request from axios");
     let token = document.cookie
       .split(";")
       .find((cookie) => cookie.includes("access_token"))
@@ -22,7 +21,6 @@ axiosInstance.interceptors.request.use(
     };
   },
   (error) => {
-    console.log("AXIOS ERROR", error);
     if (error.response.status === 401) {
       window.location.href = "/login";
     }
@@ -30,15 +28,10 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-axios.interceptors.response.use(
-  function (response) {
-    console.log("response from axios");
-    return response;
-  },
-  function (error) {
-    console.log("AXIOS ERROR", error);
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
     if (error.response.status === 401) {
-      console.log("BAAA 401di");
       window.location.href = "/login";
     }
     return Promise.reject(error);
