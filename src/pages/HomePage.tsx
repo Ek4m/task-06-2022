@@ -46,13 +46,19 @@ const HomePage = () => {
     }
   };
 
-  const onBlockUnblockHandler = async () => {
+  const onBlockUnblockHandler = async (block: boolean) => {
     if (!blockSubmissionStarted) {
       setBlockSubmissionStarted(true);
       try {
-        await api.blockUnblockUsers({
-          user_id: selectedUsers,
-        });
+        if (block) {
+          await api.blockUsers({
+            user_id: selectedUsers,
+          });
+        } else {
+          await api.unblockUsers({
+            user_id: selectedUsers,
+          });
+        }
         setSelectedUsers([]);
       } catch (e) {
         console.log(e);
@@ -61,6 +67,7 @@ const HomePage = () => {
       }
     }
   };
+
   const { data: users, loading, error } = useFetch(api.getAllUsers);
   console.log(error);
   return (
@@ -73,15 +80,26 @@ const HomePage = () => {
         <div className="py-1 my-1 d-flex justify-content-around">
           {" "}
           <code>{selectedUsers.length} element(s) selected</code>
-          <button
-            disabled={blockSubmissionStarted}
-            onClick={onBlockUnblockHandler}
-            className="btn btn-dark"
-          >
-            {blockSubmissionStarted
-              ? "Submitting..."
-              : "   Block/Unblock selected user(s)"}
-          </button>
+          <div>
+            <button
+              disabled={blockSubmissionStarted}
+              onClick={() => onBlockUnblockHandler(true)}
+              className="btn btn-dark"
+            >
+              {blockSubmissionStarted
+                ? "Submitting..."
+                : "   Block selected user(s)"}
+            </button>
+            <button
+              disabled={blockSubmissionStarted}
+              onClick={() => onBlockUnblockHandler(false)}
+              className="btn btn-dark mx-2"
+            >
+              {blockSubmissionStarted
+                ? "Submitting..."
+                : "   Unblock selected user(s)"}
+            </button>
+          </div>
         </div>
       )}
       {error && (
