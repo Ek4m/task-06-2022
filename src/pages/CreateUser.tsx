@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../api";
 import { UserCredentials } from "../types";
 import * as Yup from "yup";
-import { AxiosError } from "axios";
 
 const CreateUserSchema = Yup.object().shape({
   birth_date: Yup.date().required("Birth date required"),
@@ -27,7 +26,7 @@ const CreateUser = () => {
     { setSubmitting }: FormikHelpers<UserCredentials>
   ) => {
     try {
-      const { data } = await api.createUser(values);
+      await api.createUser(values);
       navigate("/");
     } catch (e: any) {
       if (e.response && e.response.data && e.response.data.errors) {

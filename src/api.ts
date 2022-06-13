@@ -1,6 +1,5 @@
 import { REST_API } from "./constants/api";
 import axios from "axios";
-import { string } from "yup";
 import { UserCredentials } from "./types";
 
 const axiosInstance = axios.create({

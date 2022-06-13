@@ -21,7 +21,7 @@ const SingleUser = () => {
           console.log(err);
         });
     }
-  }, []);
+  }, [params.userId]);
 
   const onSubmitHandler = async (
     values: UserCredentials,
