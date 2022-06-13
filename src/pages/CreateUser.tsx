@@ -10,9 +10,9 @@ const CreateUserSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email required"),
   name: Yup.string().required("First name required"),
   surname: Yup.string().required("Last name required"),
-  username: Yup.number()
-    .min(100000000000, "12 digits")
-    .max(999999999999, "12 digits")
+  username: Yup.string()
+    .length(12)
+    .required("Number required")
     .required("Username required"),
   password: Yup.string().required("Password required"),
 });
@@ -47,7 +47,8 @@ const CreateUser = () => {
           name: "",
           password: "",
           surname: "",
-          username: 1,
+         username:""
+
         }}
         onSubmit={onSubmitHandler}
       >

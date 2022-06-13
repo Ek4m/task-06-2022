@@ -12,7 +12,7 @@ interface UserCredentials {
  * and the other for get requests
  */
 export interface UserPostCredentials extends UserCredentials {
-  username: number;
+  username: string;
 }
 
 export interface UserGetCredentials extends UserCredentials {

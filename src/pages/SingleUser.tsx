@@ -46,13 +46,13 @@ const SingleUser = () => {
       {user && (
         <Formik
           initialValues={{
-            name: user.data.name,
-            surname: user.data.surname,
-            email: user.data.email,
-            birth_date: user.data.birth_date,
-            gender: user.data.gender,
-            password: user.data.password,
-            username: user.data.number,
+            name: user.data.name || "",
+            surname: user.data.surname || "",
+            email: user.data.email || "",
+            birth_date: user.data.birth_date || "",
+            gender: user.data.gender || "",
+            password: "",
+            username: user.data.number?.toString() || "",
           }}
           onSubmit={onSubmitHandler}
         >
